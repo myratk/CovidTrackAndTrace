@@ -13,7 +13,7 @@
 <h1>Covid Track and Trace System</h1>
 
 <p><a href="PublicPage.php" target="_blank">Register a Case</a></p>
-<p><a href="StaffPage.php" target="_blank">Staff Login</a></p>
+<p><a href="LoginPage.php" target="_blank">Staff Login</a></p>
 <p><a href="AboutUsPage.php" target="_blank">About Us</a></p>
 <p><a href="GetHelp.php" target="_blank">Get Help</a></p>
 
