@@ -1,6 +1,5 @@
 <!--This file is public page -- Register(Only contain heading)-->
 <!--@Date 03/07/2021-->
-<!--@Author Meishan Liu-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +11,6 @@
 </head>
 <body>
 
-<a href="Homepage.php">Back to Home Page --> </a>
 
 <!--Implement the register function here-->
 <?php
@@ -22,6 +20,18 @@
 //        require "connect.php";
 //    }
 //?>
+
+<form>
+    <label for="fname">First Name: </label>
+    <input type="text" id="fname" name="fname"><br><br>
+    <label for="lname">Last Name: </label>
+    <input type="text" id="lname" name="lname"><br><br>
+    <label for="nhsNum">NHS number: </label>
+    <input type="text" id="nhsNum" name="nhsNum"><br><br>
+
+</form>
+
+<a href="Homepage.php">Back to Home Page --> </a>
 
 </body>
 </html>
