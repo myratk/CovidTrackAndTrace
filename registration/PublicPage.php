@@ -56,8 +56,6 @@
     <div>
         <button type="submit" class="registerBtn" name="reg_case">Register Case</button>
     </div>
-
-
 </form>
 
 <a href="Homepage.php">Back to Home Page --> </a>
