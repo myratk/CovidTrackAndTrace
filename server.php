@@ -9,12 +9,46 @@ $city = "";
 $postcode = "";
 $telephone = "";
 $reason = "";
+
+$username = "";
+$password = "";
+$empID = "";
+
 $errors = array();
 
 global $connection;
 require 'connect.php';
 
-error_reporting(E_ALL);
+
+if (isset($_POST['login_staff'])) {
+    $empID = $_REQUEST['empID'];
+    $username = $_REQUEST['username'];
+    $password = $_REQUEST['password'];
+
+    if (empty($empID)) { array_push($errors, "Employee ID is required"); }
+    if (empty($username)) { array_push($errors, "Username is required"); }
+    if (empty($password)) { array_push($errors, "Password is required"); }
+
+    if (count($errors) == 0) {
+        $queryLogin = "SELECT * FROM employee INNER JOIN login USING(loginID) WHERE employeeID=\"" . $empID . "\"";
+        $login = $connection -> query($queryLogin) -> fetch(PDO::FETCH_ASSOC);
+
+        if ($login['username']==$username && $login['password']==$password) {
+            $queryName = "SELECT title, firstName, lastName FROM employee INNER JOIN person USING (NHSnumber) WHERE employeeID=\"" . $empID . "\"";
+            $name = $connection -> query($queryName) -> fetch(PDO::FETCH_ASSOC);
+            session_start();
+            $_SESSION['username'] = $username;
+            $_SESSION['firstName'] = $name['firstName'];
+            $_SESSION['lastName'] = $name['lastName'];
+            $_SESSION['title'] = $name['title'];
+            $_SESSION['success'] = "You are now logged in";
+            header('location: StaffPage.php');
+        }
+        else {
+            array_push($errors, "Incorrect employee ID or username or password");
+        }
+    }
+}
 
 if (isset($_POST['reg_case'])) {
     $fname =  $_REQUEST['fname'];

@@ -3,13 +3,15 @@
 <?php require 'server.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
-<br>
+
+<head>
 <meta charset="UTF-8">
 <title>Covid-19 Search System | Public</title>
+</head>
+
+<body>
 <h1>COVID Track and Trace System</h1><br>
 <h2>Register a Case | Public</h2>
-</head>
-<body>
 
 <form method="post" action="PublicPage.php">
     <?php require 'errors.php'; ?>
