@@ -1,4 +1,7 @@
-<?php require 'server.php'; ?>
+<?php
+require 'server.php';
+global $errorsLogin;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +17,10 @@
 <h2>Employee Login</h2>
 
 <form method="post" action="LoginPage.php">
-    <?php require 'errors.php'; ?>
+    <?php
+    require 'errors.php';
+    displayErrors($errorsLogin);
+    ?>
     <div>
         <label for="empID">Employee ID:</label>
         <input type="text" id="empID" name="empID"><br><br>

@@ -1,6 +1,9 @@
 <!--This file is public page -- Register(Only contain heading)-->
 <!--@Date 03/07/2021-->
-<?php require 'server.php'; ?>
+<?php
+require 'server.php';
+global $errorsReg;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +17,10 @@
 <h2>Register a Case | Public</h2>
 
 <form method="post" action="PublicPage.php">
-    <?php require 'errors.php'; ?>
+    <?php
+    require 'errors.php';
+    displayErrors($errorsReg);
+    ?>
     <div>
         <label for="fname">First Name: </label>
         <input type="text" id="fname" name="fname"><br><br>

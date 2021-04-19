@@ -14,7 +14,16 @@ $username = "";
 $password = "";
 $empID = "";
 
-$errors = array();
+$nhsNumberRecovered = "";
+
+$nhsNumberVaccine = "";
+$firstDose = date("");
+$secondDose = date("");
+
+$errorsLogin = array();
+$errorsNHSNum = array();
+$errorsVac = array();
+$errorsReg = array();
 
 global $connection;
 require 'connect.php';
@@ -25,11 +34,11 @@ if (isset($_POST['login_staff'])) {
     $username = $_REQUEST['username'];
     $password = $_REQUEST['password'];
 
-    if (empty($empID)) { array_push($errors, "Employee ID is required"); }
-    if (empty($username)) { array_push($errors, "Username is required"); }
-    if (empty($password)) { array_push($errors, "Password is required"); }
+    if (empty($empID)) { array_push($errorsLogin, "Employee ID is required"); }
+    if (empty($username)) { array_push($errorsLogin, "Username is required"); }
+    if (empty($password)) { array_push($errorsLogin, "Password is required"); }
 
-    if (count($errors) == 0) {
+    if (count($errorsLogin) == 0) {
         $queryLogin = "SELECT * FROM employee INNER JOIN login USING(loginID) WHERE employeeID=\"" . $empID . "\"";
         $login = $connection -> query($queryLogin) -> fetch(PDO::FETCH_ASSOC);
 
@@ -45,9 +54,56 @@ if (isset($_POST['login_staff'])) {
             header('location: StaffPage.php');
         }
         else {
-            array_push($errors, "Incorrect employee ID or username or password");
+            array_push($errorsLogin, "Incorrect employee ID or username or password");
         }
     }
+}
+
+if (isset($_POST['NHS_Number'])) {
+    $nhsNumberRecovered = $_REQUEST['NHSnum'];
+    if (empty($nhsNumberRecovered)) { array_push($errorsNHSNum, "NHS number is required"); }
+
+    if (count($errorsNHSNum) == 0){
+        $queryNHSNumExists = "SELECT * FROM activecase WHERE NHSnumber=\"" . $nhsNumberRecovered . "\"";
+        $NHSNumExists = $connection -> query($queryNHSNumExists) -> fetch(PDO::FETCH_ASSOC);
+        if (!$NHSNumExists) {
+            array_push($errorsNHSNum, "No active case registered with this NHS number");
+        }
+        else {
+            $queryAddRecovered = "INSERT INTO recovered(caseID, NHSnumber, reasonID, registrationDate) ";
+            $queryAddRecovered .= "VALUES(\"" . $NHSNumExists['caseID'] . "\", \"" . $NHSNumExists['NHSnumber'] . "\", \"" . $NHSNumExists['reasonID'] . "\", \"" . $NHSNumExists['RegistrationDate'] . "\")";
+            $connection -> query($queryAddRecovered);
+            $queryRemoveCase = "DELETE FROM activecase WHERE NHSnumber=\"" . $nhsNumberRecovered . "\"";
+            $connection -> query($queryRemoveCase);
+        }
+    }
+}
+
+if  (isset($_POST['register_vaccine'])) {
+    $nhsNumberVaccine = $_REQUEST['NHSNumVac'];
+    $firstDose = $_REQUEST['firstDate'];
+    $secondDose = $_REQUEST['secondDate'];
+
+    if (empty($nhsNumberVaccine)) { array_push($errorsVac, "NHS number is required"); }
+    if (empty($firstDose)) { array_push($errorsVac, "First dose date is required"); }
+    if (empty($secondDose)) { array_push($errorsVac, "Second dose date is required"); }
+
+    if (count($errorsVac) == 0) {
+        $queryVaccineExists = "SELECT * FROM vaccination WHERE NHSnumber=\"" . $nhsNumberVaccine . "\"";
+        $vaccineExists = $connection -> query($queryVaccineExists) -> fetch(PDO::FETCH_ASSOC);
+        if ($vaccineExists) {
+            array_push($errorsVac, "This person is already registered for a vaccine");
+        }
+        else {
+            $totalCases = ($connection -> query("SELECT COUNT(*) FROM vaccinaton")) +1;
+            $vaccinationID = "VAC" . $totalCases;
+            $queryRegisterVaccine = "INSERT INTO vaccination(vaccinationID, NHSnumber, firstDose, secondDose) ";
+            $queryRegisterVaccine .= "VALUES(\"" . $vaccinationID . "\", \"" . $nhsNumberVaccine . "\", \"" . $firstDose . "\", \"" . $secondDose . "\")";
+            $connection -> query($queryRegisterVaccine);
+        }
+
+    }
+
 }
 
 if (isset($_POST['reg_case'])) {
@@ -61,41 +117,39 @@ if (isset($_POST['reg_case'])) {
     $telephone = $_REQUEST['telephone'];
     $reason = $_REQUEST['reason'];
 
-    if (empty($fname)) { array_push($errors, "First name is required"); }
-    if (empty($lname)) { array_push($errors, "Last name is required"); }
-    if (empty($NHSnum)) { array_push($errors, "NHS number is required"); }
-    if (empty($dob)) { array_push($errors, "Date of birth is required"); }
-    if (empty($address)) { array_push($errors, "Address is required"); }
-    if (empty($city)) { array_push($errors, "City is required"); }
-    if (empty($postcode)) { array_push($errors, "Post code is required"); }
-    if (empty($telephone)) { array_push($errors, "Telephone number is required"); }
+    if (empty($fname)) { array_push($errorsReg, "First name is required"); }
+    if (empty($lname)) { array_push($errorsReg, "Last name is required"); }
+    if (empty($NHSnum)) { array_push($errorsReg, "NHS number is required"); }
+    if (empty($dob)) { array_push($errorsReg, "Date of birth is required"); }
+    if (empty($address)) { array_push($errorsReg, "Address is required"); }
+    if (empty($city)) { array_push($errorsReg, "City is required"); }
+    if (empty($postcode)) { array_push($errorsReg, "Post code is required"); }
+    if (empty($telephone)) { array_push($errorsReg, "Telephone number is required"); }
 
-    if (count($errors) == 0) {
+    if (count($errorsReg) == 0) {
         $queryNHSnum = "SELECT * FROM person WHERE NHSnumber=\"" . $NHSnum . "\"";
         $person = $connection -> query($queryNHSnum) -> fetch(PDO::FETCH_ASSOC);
 
         if (is_null($person)) {
-            array_push($errors, "No NHS record found. Check your NHS number");
+            array_push($errorsReg, "No NHS record found. Check your NHS number");
         } else {
             $queryCaseExists = "SELECT * FROM activecase WHERE NHSnumber=\"" . $NHSnum . "\"";
             $caseExists = $connection -> query($queryCaseExists) ->fetch(PDO::FETCH_ASSOC);
             if ($caseExists) {
-                array_push($errors, "Your case has already been registered with NHS");
+                array_push($errorsReg, "Your case has already been registered with NHS");
             }
             if ($person['firstName']!=$fname or $person['lastName']!=$lname or $person['dateOfBirth']!=$dob or $person['postalCode']!=$postcode or $person['phoneNumber']!=$telephone) {
-                array_push($errors, "The details you entered don't match your NHS record");
+                array_push($errorsReg, "The details you entered don't match your NHS record");
             }
         }
     }
 
 
-    if (count($errors) == 0) {
+    if (count($errorsReg) == 0) {
         $queryReasonID = "SELECT reasonID FROM reason WHERE description=\"" . $reason . "\"";
         $reasonID = $connection -> query($queryReasonID) -> fetchColumn();
 
-        $queryTotalCases = "SELECT COUNT(*) FROM activecase";
-        $totalCases = ($connection -> query($queryTotalCases) -> fetchColumn()) + 1;
-        $caseID = "AC" . substr($fname, 0, 1) . substr($lname, 0, 1) . $totalCases;
+        $caseID = "AC" . substr($fname, 0, 1) . substr($lname, 0, 1) . substr($NHSnum, 7, 3);
 
         $queryCaseEntry = "INSERT INTO activecase(caseID, NHSnumber, reasonID, RegistrationDate) ";
         $queryCaseEntry .= "VALUES(\"" . $caseID . "\", \"" . $NHSnum . "\", \"" . $reasonID . "\", \"" . date("Y-m-d") . "\")";
