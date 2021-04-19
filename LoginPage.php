@@ -10,6 +10,8 @@ global $errorsLogin;
     <title>Employee Login</title>
     <meta name="author" content="Null Pointer">
     <meta name="description" content="Employee Login for the Covid Trace and Trace System">
+
+    <link rel="stylesheet" href="logindesign.css" />
 </head>
 
 <body>
