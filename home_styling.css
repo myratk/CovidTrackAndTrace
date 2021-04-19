@@ -1,0 +1,59 @@
+body{
+	margin: 0;
+	color:blue;
+	background-color: #2D2F30;
+}
+h1{
+	margin: 0;
+	font-weight: bolder;
+	font-size: 9vh;
+	font-family: 'Oswald';
+	color: black;
+	padding-top: 0.5%;
+	padding-left: 0.5%;
+	padding-bottom: 0.3%;
+	background-color: #EBF1F7;
+
+}
+.front{
+	height: 50%;
+	width: 100%;
+}
+
+
+/* Style the navigation menu */
+.navbar{
+  width: 100%;
+  background-color: #135EB5;
+  /*background-color: rgba(0, 0, 0, .4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);  */
+  overflow: auto;
+}
+
+/* Navigation links */
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 4vh;
+  width: 18.2%; /* Five equal-width links.. */
+  text-align: center; /* If you want the text to be centered */
+}
+
+/* Add a background color on mouse-over */
+.navbar a:hover {
+  background-color: #000;
+}
+
+
+/* Add responsiveness - on screens less than 500px, make the navigation links appear on top of each other, instead of next to each other */
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: left; /* If you want the text to be left-aligned on small screens */
+  }
+}
