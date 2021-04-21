@@ -9,7 +9,7 @@ global $errorsReg;
 
 <head>
 <meta charset="UTF-8">
-<title>Covid-19 Search System | Public</title>
+<title>Register your Case</title>
 </head>
 
 <body>

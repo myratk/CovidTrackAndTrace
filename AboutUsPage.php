@@ -10,9 +10,17 @@
 <h1>COVID 19 Track and Trace System</h1>
 <h2>About Us</h2>
 
-<p>Null Pointer's Covid Track and Trace System is designed to provide an efficient and convenient way of tracking covid patients and vaccinations.</p>
+<p>Null Pointer's Covid Track and Trace System is designed to provide an efficient and convenient way of tracking covid patients and vaccination appointments. The website offers
+a public interface where people can register their active cases based on multiple reasons. People can only be registered if they have a valid NHS number registered on our database
+    and can provide correct supporting details </p>
 
-<a href="Homepage.php">Back to Home Page --> </a>
+<p>Employees and staff members can use their login details to access the internal system to view the current active cases and relevant details of each case. The system also allows staff
+members to mark the recovered patients. The second half of the internal system gives staff members access to vaccination appointments. Appointments can be added and removed with a
+persons NHS number.</p>
+
+<p>The website is supported by a growing database to record people registered with the NHS, track active patients, and mark vaccination appointments.</p>
+
+<a href="Homepage.php">Back to Home Page </a>
 
 </body>
 </html>
