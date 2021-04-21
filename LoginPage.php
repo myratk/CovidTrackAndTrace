@@ -22,8 +22,8 @@ global $errorsLogin;
         require 'errors.php';
         displayErrors($errorsLogin);
         ?>
-        <input class="un " type="text" align="center" placeholder="Username" id="username" name="username">
-        <input class="pass" type="password" align="center" placeholder="Password" id="password" name="password"><br><br><br>
+        <input class="un " type="text" align="center" placeholder="Username" id="username" name="username" required>
+        <input class="pass" type="password" align="center" placeholder="Password" id="password" name="password" required><br><br><br>
         <button type="submit" class="submit" name="login_staff" align="center">Login</button>
     </form>
 </div>

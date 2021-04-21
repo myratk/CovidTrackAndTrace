@@ -35,9 +35,8 @@ if (isset($_POST['login_staff'])) {
     $username = $_REQUEST['username'];
     $password = $_REQUEST['password'];
 
-    if (empty($username) && empty($password)) { array_push($errorsLogin,"Username and Password are required"); }
-    else if (empty($username)) { array_push($errorsLogin, "Username is required"); }
-    else if (empty($password)) { array_push($errorsLogin, "Password is required"); }
+    if (empty($username)) { array_push($errorsLogin, "Username is required"); }
+    if (empty($password)) { array_push($errorsLogin, "Password is required"); }
 
     if (count($errorsLogin) == 0) {
         $queryLogin = "SELECT * FROM employee INNER JOIN login USING(loginID) WHERE username=\"" . $username . "\"";

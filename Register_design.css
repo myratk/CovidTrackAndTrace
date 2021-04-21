@@ -1,0 +1,83 @@
+body{
+    font-family: Calibri, Helvetica, sans-serif;
+    background-color: 	#3b444b;
+    margin: 0;
+    font-weight: bold;
+    font-size: 3vh;
+}
+a{
+    color: white;
+    float: right;
+}
+h1{
+    margin: 0;
+    font-weight: bolder;
+    font-size: 7vh;
+    font-family: 'Oswald';
+    color: black;
+    padding-top: 0.5%;
+    padding-left: 0.5%;
+    padding-bottom: 0.3%;
+    background-color: #EBF1F7;
+
+}
+h2{
+    margin: 0;
+    font-size: 5vh;
+    font-family: 'Oswald';
+}
+.title_of_regis{
+    margin: 0;
+    font-size: 5vh;
+    font-family: 'Oswald';
+    width: 100%;
+    background-color: #135EB5;
+    padding-left: 0;
+    padding-right: 0;
+    overflow: auto;
+
+}
+.container {
+    margin: 0;
+    width: 65%;
+    background-color: lightblue;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+    border: 3px solid #73AD21;
+    border-radius: 25px;
+}
+
+input[type=text], input[type=password], input[type=tel],input[type=date],select {
+    width: 50%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+input[type=text]:focus, input[type=password]:focus,select:focus {
+    background-color: #d5d7d7;
+    outline: none;
+}
+div {
+    padding: 10px 0;
+}
+hr {
+    border: 1px solid black;
+    margin: 0;
+}
+.registerBtn {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 2vh;
+    font-weight: bold;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    opacity: 0.9;
+}
+.registerBtn:hover {
+    opacity: 1;
+}
