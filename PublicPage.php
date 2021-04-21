@@ -10,7 +10,7 @@ global $errorsReg;
 <head>
 <meta charset="UTF-8">
 <title>Register your Case</title>
-    <link rel="stylesheet" type="text/css" href="Register_design.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/Register_design.css?v=<?php echo time(); ?>">
     <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
 </head>
 

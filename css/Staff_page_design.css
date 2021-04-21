@@ -1,0 +1,104 @@
+body{
+    margin: 0;
+    color:black;
+    font-family: "Times New Roman";
+    font-size: 2.5vh;
+    background-color: #EBF1F7;
+}
+h1{
+    margin: 0;
+    font-weight: bolder;
+    font-size: 8vh;
+    font-family: 'Oswald';
+    color: black;
+    padding-top: 0.5%;
+    padding-left: 0.5%;
+    padding-bottom: 0.3%;
+}
+h2{
+    color:white;
+    background-color: #135EB5;
+    margin:0;
+    padding-top:0.5%;
+    padding-bottom:0.5%;
+    font-size:7vh;
+    font-family: Oswald;
+}
+
+h3{
+    color: black;
+    padding-left: 0.5%;
+    font-family: "Lucida Console";
+    font-weight: bolder;
+}
+table {
+
+    color: blue;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+}
+table * {
+    position: relative;
+}
+table td, table th {
+    padding-left: 8px;
+}
+table thead tr {
+    height: 60px;
+    background: #ffed86;
+    font-size: 22px;
+}
+table tbody tr {
+    height: 48px;
+    border-bottom: 1px solid #e3f1d5;
+}
+table tbody tr:last-child {
+    border: 0;
+}
+table td, table th {
+    text-align: left;
+}
+table td.l, table th.l {
+    text-align: right;
+}
+table td.c, table th.c {
+    text-align: center;
+}
+table td.r, table th.r {
+    text-align: center;
+}
+.cont1,.cont2,.cont3{
+    padding-left: 0.5%;
+    font-weight: bold;
+}
+input[type=text], input[type=password], input[type=tel],input[type=date],select {
+    width: 50%;
+    padding: 15px;
+    padding-left: 0.5% ;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border-radius: 5px;
+    background: #d5d7d7;
+}
+.submitBtn {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 2vh;
+    font-weight: bold;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    opacity: 0.9;
+}
+.submitBtn:hover {
+    opacity: 1;
+}
+.EOF{
+    font-size: 3vh;
+}

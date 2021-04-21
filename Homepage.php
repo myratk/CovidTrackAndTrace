@@ -7,7 +7,7 @@
     <title>Covid Track And Trace</title>
     <meta name="author" content="Null Pointer">
     <meta name="description" content="Home Page for the Covid Trace and Trace System">
-    <link rel="stylesheet" type="text/css" href="home_styling.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/home_styling.css?v=<?php echo time(); ?>">
     <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
 </head>
 <body>

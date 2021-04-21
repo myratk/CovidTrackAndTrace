@@ -4,15 +4,17 @@ global $errorsLogin;
 ?>
 
 <!DOCTYPE html>
-<html>    
+
 <head>
     <meta charset="UTF-8">
     <title>Staff Login</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="logindesign.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/logindesign.css?v=<?php echo time(); ?>">
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+
 </head>
 
-<body>
+
 <h1>Covid 19 Track and Trace System</h1>
 
 <div class="main">
@@ -28,7 +30,7 @@ global $errorsLogin;
     </form>
 </div>
 
-<p><a href="Homepage.php"class="homepage">Back to Home Page</a></p>
+<p><center><a href="Homepage.php"class="homepage">Back to Home Page</a></center></p>
 
 </body>    
 </html>    

@@ -25,15 +25,17 @@ if(isset($_GET['logout'])) {
 <head>
     <meta charset="UTF-8">
     <title>Staff System</title>
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="css/Staff_page_design.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
 <h1>Track and Trace -- Staff Page</h1>
 
 <?php if (isset($_SESSION['username'])) :?>
-    <h2>Welcome <?php echo $_SESSION['title'] . " " . $_SESSION['firstName'] . " " . $_SESSION['lastName']; ?></h2>
+    <center><h2>Welcome <?php echo $_SESSION['title'] . " " . $_SESSION['firstName'] . " " . $_SESSION['lastName']; ?></h2></center>
 
-    <p>These are the current active cases</p>
+    <h3>These are the current active cases</h3>
     <table>
         <thead>
         <tr>
@@ -67,24 +69,26 @@ if(isset($_GET['logout'])) {
         ?>
         </tbody>
     </table>
-    <br><br>
+
     <form method="post" action="StaffPage.php">
         <?php
         displayErrors($errorsNHSNum);
         ?>
 
-        <h2>To mark a patient as recovered enter their NHS number below</h2>
+        <center><h2>To mark a patient as recovered enter their NHS number below</h2></center><br>
+        <div class="cont1">
         <div>
-            <label for="NHSnum">NHS Number: </label>
+            <label for="NHSnum">NHS Number: </label><br>
             <input type="text" id="NHSnum" name="NHSnum"><br>
         </div>
         <div>
             <button type="submit" class="submitBtn" name="NHS_Number" onclick="return confirm('Are you sure you want to mark patient as recovered?')">Submit</button>
         </div>
+        <br>
+        </div>
     </form>
 
-    <h1>Vaccines</h1>
-    <h2>Upcoming vaccine appointments</h2>
+    <center><h2>Upcoming vaccine appointments</h2></center>
     <table>
         <thead>
         <tr>
@@ -120,49 +124,58 @@ if(isset($_GET['logout'])) {
         ?>
         </tbody>
     </table>
-    <br><br>
 
-    <h2>To register a patient for the vaccine enter their details below</h2>
+
+    <center><h2>To register a patient for the vaccine enter their details below</h2></center><br>
+    <div class="cont2">
     <form method="post" action="StaffPage.php">
         <?php
         displayErrors($errorsVac);
         ?>
 
         <div>
-            <label for="NHSNumVac">NHS Number: </label>
+            <label for="NHSNumVac">NHS Number: </label><br>
             <input type="text" id="NHSNumVac" name="NHSNumVac"><br><br>
         </div>
         <div>
-            <label for="firstDate">First Dose: </label>
+            <label for="firstDate">First Dose: </label><br>
             <input type="date" id="firstDate" name="firstDate"><br><br>
         </div>
         <div>
-            <label for="secondDate">Second Dose: </label>
+            <label for="secondDate">Second Dose: </label><br>
             <input type="date" id="secondDate" name="secondDate"><br><br>
         </div>
         <div>
             <button type="submit" class="submitBtn" name="register_vaccine" onclick="return confirm('Are you sure you want to register this patient for a vaccine?')">Submit</button>
         </div>
     </form>
+    </div>
+<br>
 
-    <h2>To remove a vaccination appointment, enter the NHS number</h2>
+    <h2>To remove a vaccination appointment, enter the NHS number</h2><br>
+    <div class="cont3">
     <form method="post" action="StaffPage.php">
         <?php
         displayErrors($errorsRemoveVac);
         ?>
 
         <div>
-            <label for="NHSnum">NHS Number: </label>
+            <label for="NHSnum">NHS Number: </label><br>
             <input type="text" id="NHSnumVacRemove" name="NHSnumVacRemove"><br>
         </div>
         <div>
             <button type="submit" class="submitBtn" name="remove_vaccination" onclick="return confirm('Are you sure you want to remove this vaccination appointment?')">Submit</button>
         </div>
     </form>
-
-    <br><a href="Homepage.php">Back to Home Page --> </a>
-    <br><a href="StaffPage.php?logout=1">Logout</a>
+    </div>
+    <br>
+    <div class="EOP">
+        <center>
+    <br><pre><a href="Homepage.php">Back to Home Page <-- </a></pre>	  <!--&#9; is for spacing-->
+        <pre><a href="StaffPage.php?logout=1">Logout</a></pre>
+        </center>
 <?php endif ?>
+    </div>
 
 </body>
 </html>
