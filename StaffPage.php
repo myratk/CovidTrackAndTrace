@@ -4,6 +4,7 @@ include 'errors.php';
 
 global $errorsVac;
 global $errorsNHSNum;
+global $errorsRemoveVac;
 session_start();
 
 if(!(isset($_SESSION['username']))) {
@@ -23,17 +24,11 @@ if(isset($_GET['logout'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Covid-19 Search System | Staff</title>
-    <meta name="author" content="Null Pointer">
-    <meta name="description" content="Staff Page Login">
+    <title>Staff System</title>
 </head>
 
 <body>
 <h1>Track and Trace -- Staff Page</h1>
-
-<p>
-    Welcome to Covid-19 Track and Trace System
-</p><br>
 
 <?php if (isset($_SESSION['username'])) :?>
     <h2>Welcome <?php echo $_SESSION['title'] . " " . $_SESSION['firstName'] . " " . $_SESSION['lastName']; ?></h2>
@@ -88,7 +83,7 @@ if(isset($_GET['logout'])) {
         </div>
     </form>
 
-    <h2>Current people registered for vaccines</h2>
+    <h2>Current people registered for the vaccine</h2>
     <table>
         <thead>
         <tr>
@@ -122,26 +117,42 @@ if(isset($_GET['logout'])) {
         </tbody>
     </table>
     <br><br>
+
+    <h2>To register a patient for the vaccine enter their details below</h2>
     <form method="post" action="StaffPage.php">
         <?php
         displayErrors($errorsVac);
         ?>
 
-        <h2>To register a patient for the vaccine enter their details below</h2>
         <div>
             <label for="NHSNumVac">NHS Number: </label>
-            <input type="text" id="NHSNumVac" name="NHSNumVac"><br>
+            <input type="text" id="NHSNumVac" name="NHSNumVac"><br><br>
         </div>
         <div>
             <label for="firstDate">First Dose: </label>
-            <input type="date" id="firstDate" name="firstDate"><br>
+            <input type="date" id="firstDate" name="firstDate"><br><br>
         </div>
         <div>
             <label for="secondDate">Second Dose: </label>
-            <input type="date" id="secondDate" name="secondDate"><br>
+            <input type="date" id="secondDate" name="secondDate"><br><br>
         </div>
         <div>
             <button type="submit" class="submitBtn" name="register_vaccine" onclick="return confirm('Are you sure you want to register this patient for a vaccine?')">Submit</button>
+        </div>
+    </form>
+
+    <h2>To remove a vaccination appointment, enter the NHS number</h2>
+    <form method="post" action="StaffPage.php">
+        <?php
+        displayErrors($errorsRemoveVac);
+        ?>
+
+        <div>
+            <label for="NHSnum">NHS Number: </label>
+            <input type="text" id="NHSnumVacRemove" name="NHSnumVacRemove"><br>
+        </div>
+        <div>
+            <button type="submit" class="submitBtn" name="remove_vaccination" onclick="return confirm('Are you sure you want to remove this vaccination appointment?')">Submit</button>
         </div>
     </form>
 

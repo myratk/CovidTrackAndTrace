@@ -14,7 +14,7 @@
 <h1>Covid 19 Track and Trace System</h1>
 <div class="navbar">
   <a class="active" href="#">Home</a>
-  <a href="registration/PublicPage.php" target="_blank">Register a Case</a>
+  <a href="PublicPage.php" target="_blank">Register a Case</a>
   <a href="AboutUsPage.php" target="_blank">About Us</a>
   <a href="GetHelp.php" target="_blank">Help</a>
   <a href="LoginPage.php" target="_blank">Login</a>
@@ -29,10 +29,6 @@
     <img src="images/poster1.jpg" alt="Covid 19 Isolation Criteria" style="width: 100%">
 
     <img src="images/poster4.png" alt="Thank you NHS" style="width: 100%">
-
-
-
-
 
 </body>
 

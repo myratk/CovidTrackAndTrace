@@ -12,7 +12,6 @@ $reason = "";
 
 $username = "";
 $password = "";
-$empID = "";
 
 $nhsNumberRecovered = "";
 
@@ -20,9 +19,12 @@ $nhsNumberVaccine = "";
 $firstDose = date("");
 $secondDose = date("");
 
+$nhsNumberVaccineRemoved = "";
+
 $errorsLogin = array();
 $errorsNHSNum = array();
 $errorsVac = array();
+$errorsRemoveVac = array();
 $errorsReg = array();
 
 global $connection;
@@ -30,20 +32,19 @@ require 'connect.php';
 
 
 if (isset($_POST['login_staff'])) {
-    $empID = $_REQUEST['empID'];
     $username = $_REQUEST['username'];
     $password = $_REQUEST['password'];
 
-    if (empty($empID)) { array_push($errorsLogin, "Employee ID is required"); }
-    if (empty($username)) { array_push($errorsLogin, "Username is required"); }
-    if (empty($password)) { array_push($errorsLogin, "Password is required"); }
+    if (empty($username) && empty($password)) { array_push($errorsLogin,"Username and Password are required"); }
+    else if (empty($username)) { array_push($errorsLogin, "Username is required"); }
+    else if (empty($password)) { array_push($errorsLogin, "Password is required"); }
 
     if (count($errorsLogin) == 0) {
-        $queryLogin = "SELECT * FROM employee INNER JOIN login USING(loginID) WHERE employeeID=\"" . $empID . "\"";
+        $queryLogin = "SELECT * FROM employee INNER JOIN login USING(loginID) WHERE username=\"" . $username . "\"";
         $login = $connection -> query($queryLogin) -> fetch(PDO::FETCH_ASSOC);
 
         if ($login['username']==$username && $login['password']==$password) {
-            $queryName = "SELECT title, firstName, lastName FROM employee INNER JOIN person USING (NHSnumber) WHERE employeeID=\"" . $empID . "\"";
+            $queryName = "SELECT title, firstName, lastName FROM (login INNER JOIN employee USING (loginID)) INNER JOIN person USING (NHSnumber) WHERE loginID=\"" . $login['loginID'] . "\"";
             $name = $connection -> query($queryName) -> fetch(PDO::FETCH_ASSOC);
             session_start();
             $_SESSION['username'] = $username;
@@ -54,7 +55,7 @@ if (isset($_POST['login_staff'])) {
             header('location: StaffPage.php');
         }
         else {
-            array_push($errorsLogin, "Incorrect employee ID or username or password");
+            array_push($errorsLogin, "Incorrect username or password");
         }
     }
 }
@@ -95,8 +96,7 @@ if  (isset($_POST['register_vaccine'])) {
             array_push($errorsVac, "This person is already registered for a vaccine");
         }
         else {
-            $totalCases = ($connection -> query("SELECT COUNT(*) FROM vaccinaton")) +1;
-            $vaccinationID = "VAC" . $totalCases;
+            $vaccinationID = "VAC" . substr($nhsNumberVaccine, 7, 3);
             $queryRegisterVaccine = "INSERT INTO vaccination(vaccinationID, NHSnumber, firstDose, secondDose) ";
             $queryRegisterVaccine .= "VALUES(\"" . $vaccinationID . "\", \"" . $nhsNumberVaccine . "\", \"" . $firstDose . "\", \"" . $secondDose . "\")";
             $connection -> query($queryRegisterVaccine);
@@ -106,6 +106,22 @@ if  (isset($_POST['register_vaccine'])) {
 
 }
 
+if (isset($_POST['remove_vaccination'])) {
+    $nhsNumberVaccine = $_REQUEST['NHSnumVacRemove'];
+    if (empty($nhsNumberVaccine)) { array_push($errorsRemoveVac, "NHS number is required"); }
+
+    if (count($errorsRemoveVac)==0) {
+        $queryVaccineExists = "SELECT * FROM vaccination WHERE NHSnumber=\"" . $nhsNumberVaccine . "\"";
+        $vaccineExists = $connection -> query($queryVaccineExists) -> fetch(PDO::FETCH_ASSOC);
+        if (!$vaccineExists) {
+            array_push($errorsRemoveVac, "No vaccine appointment registered with this NHS number");
+        }
+        else {
+            $queryRemoveVaccine = "DELETE FROM vaccination WHERE NHSnumber=\"" . $nhsNumberVaccine . "\"";
+            $connection -> query($queryRemoveVaccine);
+        }
+    }
+}
 if (isset($_POST['reg_case'])) {
     $fname =  $_REQUEST['fname'];
     $lname = $_REQUEST['lname'];

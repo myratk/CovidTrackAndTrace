@@ -1,8 +1,19 @@
+h1{
+    margin: 0;
+    font-weight: bolder;
+    font-size: 9vh;
+    font-family: 'Oswald';
+    color: black;
+    padding-top: 0.5%;
+    padding-left: 0.5%;
+    padding-bottom: 0.3%;
+    background-color: #EBF1F7;
+    text-align: center;
 
-        body {
-        background-color: #F3EBF6;
-        font-family: 'Ubuntu', sans-serif;
-    }
+}
+body {
+    background-color: #F3EBF6;
+}
     
     .main {
         background-color: #FFFFFF;
@@ -83,6 +94,14 @@
         margin-left: 33%;
         font-size: 18px;
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    }
+
+    .homepage {
+        color: navy;
+        text-decoration: none;
+        font-size: 4vh;
+        width: 18.2%; /* Five equal-width links.. */
+        text-align: center;
     }
     
     @media (max-width: 600px) {
