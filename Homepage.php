@@ -16,7 +16,6 @@
   <a class="active" href="#">Home</a>
   <a href="PublicPage.php" target="_blank">Register a Case</a>
   <a href="AboutUsPage.php" target="_blank">About Us</a>
-  <a href="GetHelp.php" target="_blank">Help</a>
   <a href="LoginPage.php" target="_blank">Login</a>
 </div>
 
