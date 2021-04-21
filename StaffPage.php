@@ -83,7 +83,8 @@ if(isset($_GET['logout'])) {
         </div>
     </form>
 
-    <h2>Current people registered for the vaccine</h2>
+    <h1>Vaccines</h1>
+    <h2>Upcoming vaccine appointments</h2>
     <table>
         <thead>
         <tr>
@@ -99,18 +100,21 @@ if(isset($_GET['logout'])) {
         <?php
         global $connection;
         require 'connect.php';
-        $queryVaccinations = "SELECT * FROM vaccination INNER JOIN person USING (NHSnumber)";
+        $queryVaccinations = "SELECT * FROM vaccination INNER JOIN person USING (NHSnumber) WHERE (firstDose>CURRENT_DATE) OR (secondDose>CURRENT_DATE)";
         $vaccinations = $connection -> query($queryVaccinations);
 
         foreach ($vaccinations as $vaccination) {
+            $currentDate = Date("Y-m-d");
             echo "<tr>";
             echo "<td>" . $vaccination['title'] . " " . $vaccination['firstName'] . " " . $vaccination['lastName'] . "</td>";
             echo "<td>" . $vaccination['NHSnumber'] . "</td>";
             echo "<td>" . $vaccination['phoneNumber'] . "</td>";
             echo "<td>" . $vaccination['email'] . "</td>";
-            echo "<td>" . $vaccination['firstDose'] . "</td>";
-            echo "<td>" . $vaccination['secondDose'] . "</td>";
+            if ($vaccination['firstDose'] > $currentDate) { echo "<td><b>" . $vaccination['firstDose'] . "</b></td>"; }
+            else { echo "<td>" . $vaccination['firstDose'] . "</td>"; }
 
+            if ($vaccination['secondDose'] > $currentDate) { echo "<td><b>" . $vaccination['secondDose'] . "</b></td>"; }
+            else { echo "<td>" . $vaccination['secondDose'] . "</td>"; }
             echo "</tr>";
         }
         ?>

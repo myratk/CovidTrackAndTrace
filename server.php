@@ -171,7 +171,8 @@ if (isset($_POST['reg_case'])) {
         $queryCaseEntry .= "VALUES(\"" . $caseID . "\", \"" . $NHSnum . "\", \"" . $reasonID . "\", \"" . date("Y-m-d") . "\")";
         $connection -> query($queryCaseEntry);
 
-        header('location: Registered.php');
+        echo "<script type='text/javascript'>alert('Your case has been registered successfully! A member of staff will contact you shortly.')</script>";
+
     }
 
 }
