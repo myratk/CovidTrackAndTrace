@@ -12,7 +12,7 @@ global $errorsLogin;
     <link rel="stylesheet" type="text/css" href="logindesign.css?v=<?php echo time(); ?>">
 </head>
 
-<body>'
+<body>
 <h1>Covid 19 Track and Trace System</h1>
 
 <div class="main">

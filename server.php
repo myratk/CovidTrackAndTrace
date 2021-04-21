@@ -43,7 +43,7 @@ if (isset($_POST['login_staff'])) {
         $queryLogin = "SELECT * FROM employee INNER JOIN login USING(loginID) WHERE username=\"" . $username . "\"";
         $login = $connection -> query($queryLogin) -> fetch(PDO::FETCH_ASSOC);
 
-        if ($login['username']==$username && $login['password']==$password) {
+        if (password_verify($password, $login['password'])) {
             $queryName = "SELECT title, firstName, lastName FROM (login INNER JOIN employee USING (loginID)) INNER JOIN person USING (NHSnumber) WHERE loginID=\"" . $login['loginID'] . "\"";
             $name = $connection -> query($queryName) -> fetch(PDO::FETCH_ASSOC);
             session_start();
