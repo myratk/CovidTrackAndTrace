@@ -20,10 +20,13 @@ global $errorsLogin;
 <div class="main">
     <p class="sign" align="center">Staff Login</p>
     <form class="form1" method="post" action="LoginPage.php">
+        <center>
         <?php
         require 'errors.php';
         displayErrors($errorsLogin);
         ?>
+        </center>
+
         <input class="un " type="text" align="center" placeholder="Username" id="username" name="username" required>
         <input class="pass" type="password" align="center" placeholder="Password" id="password" name="password" required><br><br><br>
         <button type="submit" class="submit" name="login_staff" align="center">Login</button>

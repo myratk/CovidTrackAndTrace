@@ -41,21 +41,23 @@ if (isset($_POST['login_staff'])) {
     if (count($errorsLogin) == 0) {
         $queryLogin = "SELECT * FROM employee INNER JOIN login USING(loginID) WHERE username=\"" . $username . "\"";
         $login = $connection -> query($queryLogin) -> fetch(PDO::FETCH_ASSOC);
-
-        if (password_verify($password, $login['password'])) {
-            $queryName = "SELECT title, firstName, lastName FROM (login INNER JOIN employee USING (loginID)) INNER JOIN person USING (NHSnumber) WHERE loginID=\"" . $login['loginID'] . "\"";
-            $name = $connection -> query($queryName) -> fetch(PDO::FETCH_ASSOC);
-            session_start();
-            $_SESSION['username'] = $username;
-            $_SESSION['firstName'] = $name['firstName'];
-            $_SESSION['lastName'] = $name['lastName'];
-            $_SESSION['title'] = $name['title'];
-            $_SESSION['success'] = "You are now logged in";
-            header('location: StaffPage.php');
+        if ($login) {
+            if (password_verify($password, $login['password'])) {
+                $queryName = "SELECT title, firstName, lastName FROM (login INNER JOIN employee USING (loginID)) INNER JOIN person USING (NHSnumber) WHERE loginID=\"" . $login['loginID'] . "\"";
+                $name = $connection->query($queryName)->fetch(PDO::FETCH_ASSOC);
+                session_start();
+                $_SESSION['username'] = $username;
+                $_SESSION['firstName'] = $name['firstName'];
+                $_SESSION['lastName'] = $name['lastName'];
+                $_SESSION['title'] = $name['title'];
+                $_SESSION['success'] = "You are now logged in";
+                header('location: StaffPage.php');
+            }
         }
         else {
-            array_push($errorsLogin, "Incorrect username or password");
+                array_push($errorsLogin, "Incorrect username or password");
         }
+
     }
 }
 

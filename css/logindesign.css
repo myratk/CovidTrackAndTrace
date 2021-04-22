@@ -103,7 +103,7 @@ body {
         width: 18.2%; /* Five equal-width links.. */
         text-align: center;
     }
-    
+
     @media (max-width: 600px) {
         .main {
             border-radius: 0px;
